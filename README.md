@@ -15,20 +15,14 @@ Each session is a separate notebook with:
 > 4) Submit the Drive link or the `outputs/` artifacts.
 
 ## Sessions
-- [Session 01 — Basics / GLM (template)](notebooks/session01.ipynb) [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/USER/REPO/blob/main/notebooks/session01.ipynb)
-- [Session 02 — Confounds & Design (template)](notebooks/session02.ipynb) [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/USER/REPO/blob/main/notebooks/session02.ipynb)
-- [Session 03 — Group GLM (template)](notebooks/session03.ipynb) [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/USER/REPO/blob/main/notebooks/session03.ipynb)
-- [Session 04 — Decoding / MVPA (template)](notebooks/session04.ipynb) [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/USER/REPO/blob/main/notebooks/session04.ipynb)
-- [Session 05 — Connectivity (template)](notebooks/session05.ipynb) [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/USER/REPO/blob/main/notebooks/session05.ipynb)
-- [Session 06 — RSA / Advanced (template)](notebooks/session06.ipynb) [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/USER/REPO/blob/main/notebooks/session06.ipynb)
+- [Session 01 — Basics / GLM (template)](notebooks/session01.ipynb) [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Yuan-fang/fMRI-tutorial/blob/main/notebooks/session01_Data.ipynb)
+- [Session 02 — Confounds & Design (template)](notebooks/session02.ipynb) [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Yuan-fang/fMRI-tutorial/blob/main/notebooks/session02_Preprocessing.ipynb)
+- [Session 03 — Group GLM (template)](notebooks/session03.ipynb) [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Yuan-fang/fMRI-tutorial/blob/main/notebooks/session03_GLM.ipynb)
+- [Session 04 — Decoding / MVPA (template)](notebooks/session04.ipynb) [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Yuan-fang/fMRI-tutorial/blob/main/notebooks/session04_Group.ipynb)
 
-> Replace `USER/REPO` above after you upload to GitHub.
 
-## Data hosting (recommended options)
-- **OSF**: free, citable, good for folders.  
-- **Hugging Face Datasets**: programmatic and versioned.  
-- **Zenodo**: citable DOI for a release snapshot.  
-- **Google Drive (public links)**: simplest; stable enough for class.
+## Data hosting 
+- **Google Drive (public links)**
 
 Put your data URLs in `data/urls.yml` and use the helper in `utils/fetch.py` to download.
 
