@@ -46,7 +46,7 @@ def fetch_dataset(url: str, data_dir: Path, zip_name: str = "data.zip") -> Path:
         zip_path.unlink()  # remove zip after extraction
         print(f"Downloaded and extracted to {raw_dir}")
     except Exception as e:
-        print(f"❌ Failed to fetch data: {e}")
+        print(f"Failed to fetch data: {e}")
         if zip_path.exists():
             zip_path.unlink()
         raise
