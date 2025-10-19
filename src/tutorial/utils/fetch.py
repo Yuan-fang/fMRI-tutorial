@@ -21,34 +21,21 @@ def fetch_dataset(url: str, data_dir: Path, zip_name: str = "data.zip") -> Path:
     Returns
     -------
     Path
-        Path to the extracted data directory (data_dir / "data").
+        Path to the extracted data directory (data_dir).
     """
     zip_path = data_dir / zip_name
-    raw_dir = data_dir / "data"
-    raw_dir.mkdir(parents=True, exist_ok=True)
-
-    if any(raw_dir.iterdir()):
-        print(f"Data already present: {raw_dir}")
-        return raw_dir
-
-    # Extract file ID from a full Google Drive link
-    match = re.search(r'/d/([a-zA-Z0-9_-]+)', url)
-    if not match:
-        raise ValueError("Invalid Google Drive link format.")
-    file_id = match.group(1)
-    download_url = f"https://drive.google.com/uc?id={file_id}"
 
     try:
-        print(f"Downloading from {download_url} ...")
-        gdown.download(download_url, str(zip_path), quiet=False)
+        print(f"Downloading from {url} ...")
+        gdown.download(url, str(zip_path), quiet=False)
         with zipfile.ZipFile(zip_path, "r") as z:
-            z.extractall(raw_dir)
+            z.extractall(data_dir)
         zip_path.unlink()  # remove zip after extraction
-        print(f"Downloaded and extracted to {raw_dir}")
+        print(f"Downloaded and extracted to {data_dir}")
     except Exception as e:
         print(f"Failed to fetch data: {e}")
         if zip_path.exists():
             zip_path.unlink()
         raise
 
-    return raw_dir
+    return data_dir
