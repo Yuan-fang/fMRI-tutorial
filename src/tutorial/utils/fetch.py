@@ -72,4 +72,4 @@ def fetch_dataset(url: str, data_dir: Path, zip_name: str = "data.zip") -> Path:
             zip_path.unlink()
         raise
 
-    return data_dir, extracted_items
+    return data_dir
