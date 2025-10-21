@@ -1,5 +1,6 @@
 # src/utils/fetch.py
 import re
+import shutil
 import gdown
 import zipfile
 from pathlib import Path
@@ -26,10 +27,32 @@ def fetch_dataset(url: str, data_dir: Path, zip_name: str = "data.zip") -> Path:
     zip_path = data_dir / zip_name
 
     try:
+        # download the zip file
         print(f"Downloading from {url} ...")
         gdown.download(url, str(zip_path), quiet=False)
+        
+        # create a temporary extraction directory
+        tmp_extract = data_dir / "_tmp_extract"
+        tmp_extract.mkdir(exist_ok=True)
+
+        # extract the zip file to the temporary directory
         with zipfile.ZipFile(zip_path, "r") as z:
-            z.extractall(data_dir)
+            z.extractall(tmp_extract)
+
+        # Move all extracted files to the data directory (flatten if there's a top-level folder)
+        extracted_items = list(tmp_extract.iterdir())
+        if len(extracted_items) == 1 and extracted_items[0].is_dir():
+            # If there's a single top-level folder, move its contents up
+            for item in extracted_items[0].iterdir():
+                shutil.move(str(item), str(data_dir))
+        else:
+            # Otherwise move everything directly
+            for item in extracted_items:
+                shutil.move(str(item), str(data_dir))
+        
+        # Cleanup
+        shutil.rmtree(tmp_extract)
+
         zip_path.unlink()  # remove zip after extraction
         print(f"Downloaded and extracted to {data_dir}")
     except Exception as e:
