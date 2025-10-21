@@ -53,6 +53,7 @@ def fetch_dataset(url: str, data_dir: Path, zip_name: str = "data.zip") -> Path:
 
         # filter out junk before inspecting / moving
         extracted_items = [p for p in tmp_extract.iterdir() if not _is_macos_junk(p)]
+        print(f"Extracted items: {[p.name for p in extracted_items]}")
 
         if len(extracted_items) == 1 and extracted_items[0].is_dir():
             # If there's a single top-level folder, move its contents up
