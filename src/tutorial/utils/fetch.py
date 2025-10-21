@@ -38,10 +38,8 @@ def fetch_dataset(url: str, data_dir: Path, zip_name: str = "data.zip") -> Path:
         # extract the zip file to the temporary directory
         with zipfile.ZipFile(zip_path, "r") as z:
             z.extractall(tmp_extract)
-
-        # Move all extracted files to the data directory (flatten if there's a top-level folder)
-        extracted_items = list(tmp_extract.iterdir())
-
+        
+        # function to identify macOS junk files/folders
         # right after extraction
         def _is_macos_junk(p: Path) -> bool:
              n = p.name
@@ -53,8 +51,7 @@ def fetch_dataset(url: str, data_dir: Path, zip_name: str = "data.zip") -> Path:
 
         # filter out junk before inspecting / moving
         extracted_items = [p for p in tmp_extract.iterdir() if not _is_macos_junk(p)]
-        print(f"Extracted items: {[p.name for p in extracted_items]}")
-
+        
         if len(extracted_items) == 1 and extracted_items[0].is_dir():
             # If there's a single top-level folder, move its contents up
             for item in extracted_items[0].iterdir():
