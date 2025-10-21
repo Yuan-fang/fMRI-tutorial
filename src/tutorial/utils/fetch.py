@@ -41,6 +41,19 @@ def fetch_dataset(url: str, data_dir: Path, zip_name: str = "data.zip") -> Path:
 
         # Move all extracted files to the data directory (flatten if there's a top-level folder)
         extracted_items = list(tmp_extract.iterdir())
+
+        # right after extraction
+        def _is_macos_junk(p: Path) -> bool:
+             n = p.name
+             return (
+                  n == "__MACOSX" or
+                  n == ".DS_Store" or
+                  n.startswith("._")
+                  )
+
+        # filter out junk before inspecting / moving
+        extracted_items = [p for p in tmp_extract.iterdir() if not _is_macos_junk(p)]
+
         if len(extracted_items) == 1 and extracted_items[0].is_dir():
             # If there's a single top-level folder, move its contents up
             for item in extracted_items[0].iterdir():
