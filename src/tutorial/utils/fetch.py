@@ -1,4 +1,5 @@
 # src/utils/fetch.py
+import os
 import re
 import shutil
 import gdown
@@ -52,13 +53,24 @@ def fetch_dataset(url: str, data_dir: Path, zip_name: str = "data.zip") -> Path:
         # filter out junk before inspecting / moving
         extracted_items = [p for p in tmp_extract.iterdir() if not _is_macos_junk(p)]
 
+
         if len(extracted_items) == 1 and extracted_items[0].is_dir():
             # If there's a single top-level folder, move its contents up
             for item in extracted_items[0].iterdir():
+                if item.exists():
+                    if item.is_file() or item.is_symlink():
+                        item.unlink()
+                    elif item.is_dir():
+                        shutil.rmtree(str(item))
                 shutil.move(str(item), str(data_dir))
         else:
             # Otherwise move everything directly
             for item in extracted_items:
+                if item.exists():
+                    if item.is_file() or item.is_symlink():
+                        item.unlink()
+                    elif item.is_dir():
+                        shutil.rmtree(str(item))
                 shutil.move(str(item), str(data_dir))
         
         # Cleanup
